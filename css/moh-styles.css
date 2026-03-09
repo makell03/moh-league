@@ -1,0 +1,963 @@
+/* ==========================================================================
+   moh-styles.css — Men of Honor Dynasty Fantasy Football
+   Dark Gold Design System for MyFantasyLeague.com
+   Hosted on GitHub Pages: https://makell03.github.io/moh-league/css/moh-styles.css
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. GOOGLE FONTS IMPORT
+   -------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Inter:wght@400;500;600&display=swap');
+
+/* --------------------------------------------------------------------------
+   2. CSS CUSTOM PROPERTIES
+   -------------------------------------------------------------------------- */
+:root {
+  /* Colors */
+  --color-bg-primary:    #0d1117;
+  --color-bg-card:       #161b22;
+  --color-bg-card-hover: #1c2128;
+  --color-accent:        #C9A84C;
+  --color-accent-glow:   rgba(201, 168, 76, 0.15);
+  --color-accent-dim:    rgba(201, 168, 76, 0.4);
+  --color-text-primary:  #e6edf3;
+  --color-text-secondary:#8b949e;
+  --color-border:        #30363d;
+  --color-positive:      #3fb950;
+  --color-negative:      #f85149;
+  --color-neutral:       #58a6ff;
+
+  /* Position badge colors */
+  --color-qb:  rgba(220, 53, 69, 0.2);
+  --color-rb:  rgba(63, 185, 80, 0.2);
+  --color-wr:  rgba(88, 166, 255, 0.2);
+  --color-te:  rgba(201, 168, 76, 0.2);
+  --color-k:   rgba(139, 148, 158, 0.2);
+  --color-def: rgba(139, 148, 158, 0.2);
+
+  /* Spacing */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  32px;
+
+  /* Typography */
+  --font-heading: 'Poppins', sans-serif;
+  --font-body:    'Inter', sans-serif;
+
+  /* Shadows */
+  --shadow-card:  0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.6);
+  --shadow-gold:  0 4px 20px rgba(201, 168, 76, 0.2);
+
+  /* Layout */
+  --nav-height:    60px;
+  --ticker-height: 36px;
+  --content-offset: 96px; /* nav + ticker */
+
+  /* Radius */
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  16px;
+
+  /* Transition */
+  --transition: 0.2s ease;
+}
+
+/* --------------------------------------------------------------------------
+   3. GLOBAL RESET
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg-primary) !important;
+  font-family: var(--font-body) !important;
+  color: var(--color-text-primary) !important;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-card);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+  transition: background var(--transition);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+/* Link colors */
+a, a:visited {
+  color: var(--color-accent) !important;
+  text-decoration: none;
+  transition: color var(--transition);
+}
+a:hover {
+  color: var(--color-text-primary) !important;
+  text-decoration: none;
+}
+
+/* --------------------------------------------------------------------------
+   4. MFL CHROME OVERRIDES — Force dark on all MFL-rendered elements
+   -------------------------------------------------------------------------- */
+
+/* Core wrappers */
+body, #container, #page, #content, #main, #wrapper,
+#page_content, #body_home, #body_options,
+.page_content, .main_content, .content_area,
+div[id^="body_"] {
+  background-color: var(--color-bg-primary) !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* Kill inline bgcolor on MFL table cells */
+table[bgcolor], td[bgcolor], tr[bgcolor] {
+  background-color: transparent !important;
+}
+table[background], td[background] {
+  background-image: none !important;
+}
+
+/* MFL default header / logo / nav — hidden, replaced by #moh-header */
+#site_header, #header, .site_header,
+#nav, #navigation, .site_nav,
+#logo, .site_logo, .header_logo,
+#top_nav, .top_navigation,
+#mfl_header, .mfl_header,
+img[src*="mfl_header"], img[src*="site_logo"] {
+  display: none !important;
+}
+
+/* MFL announcement bars we don't need */
+#announcement, .announcement, .alert-mfl {
+  display: none !important;
+}
+
+/* Content offset for sticky nav + ticker */
+#content, #page_content, #body_home, #body_options,
+.page_content, .main_content {
+  padding-top: var(--content-offset) !important;
+}
+
+/* Kill MFL's white/gray page backgrounds on inner elements */
+#page { background: var(--color-bg-primary) !important; }
+#container { background: var(--color-bg-primary) !important; }
+
+/* Force text color on all MFL td/th */
+td, th {
+  color: var(--color-text-primary) !important;
+}
+
+/* MFL footer bar */
+#site_footer, .site_footer, #footer {
+  background: var(--color-bg-card) !important;
+  color: var(--color-text-secondary) !important;
+  border-top: 1px solid var(--color-border) !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. #moh-header — Sticky nav bar
+   -------------------------------------------------------------------------- */
+#moh-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(13, 17, 23, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-border);
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-lg);
+}
+
+#moh-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+#moh-logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none !important;
+}
+
+#moh-logo-wrap img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+#moh-site-name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--color-accent) !important;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   6. #moh-nav-links — Desktop navigation
+   -------------------------------------------------------------------------- */
+#moh-nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#moh-nav-links li a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-text-secondary) !important;
+  border-radius: var(--radius-sm);
+  border-bottom: 2px solid transparent;
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+  white-space: nowrap;
+}
+
+#moh-nav-links li a:hover,
+#moh-nav-links li a.moh-active {
+  color: var(--color-accent) !important;
+  border-bottom-color: var(--color-accent);
+  background: var(--color-accent-glow);
+}
+
+#moh-nav-links li a i {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+/* --------------------------------------------------------------------------
+   7. #moh-hamburger + #moh-mobile-menu
+   -------------------------------------------------------------------------- */
+#moh-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+#moh-hamburger span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--color-text-primary);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#moh-hamburger.moh-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+#moh-hamburger.moh-open span:nth-child(2) {
+  opacity: 0;
+}
+#moh-hamburger.moh-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+#moh-mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  background: rgba(13, 17, 23, 0.98);
+  backdrop-filter: blur(12px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-xl);
+}
+
+#moh-mobile-menu.moh-open {
+  display: flex;
+}
+
+#moh-mobile-menu a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: 14px 32px;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  width: 100%;
+  max-width: 320px;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+
+#moh-mobile-menu a:hover {
+  background: var(--color-accent-glow);
+  border-color: var(--color-accent);
+  color: var(--color-accent) !important;
+}
+
+#moh-mobile-menu a i {
+  font-size: 1.1rem;
+  width: 24px;
+  text-align: center;
+  color: var(--color-accent);
+}
+
+#moh-mobile-close {
+  position: absolute;
+  top: var(--space-lg);
+  right: var(--space-lg);
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+/* --------------------------------------------------------------------------
+   8. #moh-ticker — News ticker bar
+   -------------------------------------------------------------------------- */
+#moh-ticker {
+  position: sticky;
+  top: var(--nav-height);
+  z-index: 999;
+  height: var(--ticker-height);
+  background: var(--color-bg-card);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+#moh-ticker-label {
+  flex-shrink: 0;
+  padding: 0 var(--space-md);
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--color-bg-primary);
+  background: var(--color-accent);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+#moh-ticker-track {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+#moh-ticker-content {
+  display: inline-block;
+  white-space: nowrap;
+  animation: ticker-scroll 60s linear infinite;
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  padding-left: 100%;
+}
+
+#moh-ticker-content:hover {
+  animation-play-state: paused;
+}
+
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* --------------------------------------------------------------------------
+   9. #moh-hero — Home page hero banner
+   -------------------------------------------------------------------------- */
+#moh-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-xl);
+  margin: var(--space-lg) auto;
+  max-width: 1200px;
+  background: linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-bg-primary) 100%);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+#moh-hero::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: -60px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, var(--color-accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+#moh-hero-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  position: relative;
+  z-index: 1;
+}
+
+#moh-hero-logo {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 16px rgba(201, 168, 76, 0.3));
+}
+
+#moh-hero-text h1 {
+  font-family: var(--font-heading);
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--color-accent) !important;
+  margin: 0 0 var(--space-xs) 0;
+  line-height: 1.1;
+  text-shadow: 0 2px 20px rgba(201, 168, 76, 0.3);
+}
+
+#moh-hero-text .moh-tagline {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+
+#moh-hero-year {
+  position: absolute;
+  right: var(--space-xl);
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-heading);
+  font-size: 7rem;
+  font-weight: 800;
+  color: var(--color-accent);
+  opacity: 0.06;
+  pointer-events: none;
+  line-height: 1;
+  user-select: none;
+}
+
+/* --------------------------------------------------------------------------
+   10. CARD SYSTEM
+   -------------------------------------------------------------------------- */
+.moh-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: var(--space-lg);
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.moh-card:hover {
+  border-color: var(--color-accent-dim);
+  box-shadow: var(--shadow-hover);
+}
+
+.moh-card-header {
+  display: flex;
+  align-items: center;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-accent);
+  background: rgba(201, 168, 76, 0.04);
+}
+
+.moh-card-header h3 {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.moh-card-accent {
+  border-left: 4px solid var(--color-accent);
+}
+
+.moh-card-body {
+  padding: var(--space-md);
+}
+
+/* --------------------------------------------------------------------------
+   11. table.report OVERRIDES
+   -------------------------------------------------------------------------- */
+table.report {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent !important;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+}
+
+table.report caption {
+  display: none; /* shown in .moh-card-header instead */
+}
+
+table.report th {
+  background: rgba(201, 168, 76, 0.08) !important;
+  color: var(--color-accent) !important;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: var(--space-sm) var(--space-md) !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  white-space: nowrap;
+}
+
+table.report td {
+  padding: var(--space-sm) var(--space-md) !important;
+  border-bottom: 1px solid rgba(48, 54, 61, 0.5) !important;
+  vertical-align: middle;
+}
+
+table.report tr.oddtablerow,
+table.report tr:nth-child(odd) {
+  background: var(--color-bg-card) !important;
+}
+
+table.report tr.eventablerow,
+table.report tr:nth-child(even) {
+  background: #1a2030 !important;
+}
+
+table.report tr:hover td {
+  background: rgba(201, 168, 76, 0.06) !important;
+}
+
+table.report tr.reportfooter td {
+  background: rgba(201, 168, 76, 0.04) !important;
+  color: var(--color-text-secondary) !important;
+  font-size: 0.78rem;
+}
+
+/* Remove MFL's default table borders */
+table.report, table.report td, table.report th {
+  border-color: var(--color-border) !important;
+}
+
+/* --------------------------------------------------------------------------
+   12. POSITION BADGES
+   -------------------------------------------------------------------------- */
+.pos-badge {
+  display: inline-block;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-family: var(--font-body);
+}
+
+.pos-qb  { background: var(--color-qb);  color: #ff6b7a !important; border: 1px solid rgba(220, 53, 69, 0.3); }
+.pos-rb  { background: var(--color-rb);  color: #3fb950 !important; border: 1px solid rgba(63, 185, 80, 0.3); }
+.pos-wr  { background: var(--color-wr);  color: #58a6ff !important; border: 1px solid rgba(88, 166, 255, 0.3); }
+.pos-te  { background: var(--color-te);  color: #C9A84C !important; border: 1px solid rgba(201, 168, 76, 0.3); }
+.pos-k   { background: var(--color-k);   color: #8b949e !important; border: 1px solid rgba(139, 148, 158, 0.3); }
+.pos-def { background: var(--color-def); color: #8b949e !important; border: 1px solid rgba(139, 148, 158, 0.3); }
+
+/* Transaction type badges */
+.txn-add   { background: rgba(63, 185, 80, 0.15);  color: #3fb950 !important; border: 1px solid rgba(63, 185, 80, 0.3); }
+.txn-drop  { background: rgba(248, 81, 73, 0.15);  color: #f85149 !important; border: 1px solid rgba(248, 81, 73, 0.3); }
+.txn-trade { background: rgba(88, 166, 255, 0.15); color: #58a6ff !important; border: 1px solid rgba(88, 166, 255, 0.3); }
+.txn-waiver{ background: rgba(201, 168, 76, 0.15); color: #C9A84C !important; border: 1px solid rgba(201, 168, 76, 0.3); }
+
+/* --------------------------------------------------------------------------
+   13. TEAM CARDS GRID
+   -------------------------------------------------------------------------- */
+#moh-team-grid-wrap {
+  max-width: 1200px;
+  margin: 0 auto var(--space-xl);
+  padding: 0 var(--space-lg);
+}
+
+#moh-team-grid-wrap h2 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-md);
+  padding-left: var(--space-xs);
+}
+
+#moh-team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+}
+
+.moh-franchise-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg) var(--space-md);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  text-decoration: none !important;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition), background var(--transition);
+  gap: var(--space-sm);
+  cursor: pointer;
+}
+
+.moh-franchise-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-gold);
+  background: var(--color-bg-card-hover);
+}
+
+.moh-franchise-card img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.moh-franchise-card .moh-team-name {
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-text-primary) !important;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.moh-franchise-card .moh-team-num {
+  font-size: 0.68rem;
+  color: var(--color-text-secondary) !important;
+}
+
+/* --------------------------------------------------------------------------
+   14. FADE-IN ANIMATION
+   -------------------------------------------------------------------------- */
+.moh-fade-in {
+  animation: mohFadeIn 0.4s ease forwards;
+}
+
+@keyframes mohFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Staggered delay for grid children */
+.moh-fade-in:nth-child(1)  { animation-delay: 0.05s; }
+.moh-fade-in:nth-child(2)  { animation-delay: 0.10s; }
+.moh-fade-in:nth-child(3)  { animation-delay: 0.15s; }
+.moh-fade-in:nth-child(4)  { animation-delay: 0.20s; }
+.moh-fade-in:nth-child(5)  { animation-delay: 0.25s; }
+.moh-fade-in:nth-child(6)  { animation-delay: 0.30s; }
+.moh-fade-in:nth-child(7)  { animation-delay: 0.35s; }
+.moh-fade-in:nth-child(8)  { animation-delay: 0.40s; }
+.moh-fade-in:nth-child(9)  { animation-delay: 0.45s; }
+.moh-fade-in:nth-child(10) { animation-delay: 0.50s; }
+.moh-fade-in:nth-child(11) { animation-delay: 0.55s; }
+.moh-fade-in:nth-child(12) { animation-delay: 0.60s; }
+
+/* --------------------------------------------------------------------------
+   15. PAGE-SPECIFIC OVERRIDES
+   -------------------------------------------------------------------------- */
+
+/* Standings (O=26) */
+body[data-mfl-page="26"] table.report td:first-child {
+  font-weight: 600;
+}
+body[data-mfl-page="26"] tr.moh-playoff-line td {
+  background: rgba(201, 168, 76, 0.08) !important;
+  border-top: 2px dashed var(--color-accent) !important;
+  color: var(--color-accent) !important;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+/* Roster (O=07) */
+body[data-mfl-page="07"] table.report {
+  margin-bottom: var(--space-lg) !important;
+}
+body[data-mfl-page="07"] .moh-roster-block {
+  border-left: 4px solid var(--color-accent);
+  margin-bottom: var(--space-lg);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+/* Live scoring (O=24) */
+body[data-mfl-page="24"] table.report td {
+  font-size: 0.88rem;
+}
+#moh-refresh-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition);
+}
+#moh-refresh-toggle:hover,
+#moh-refresh-toggle.active {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Player stats (O=10) */
+body[data-mfl-page="10"] table.report td.stat-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Add/Drop filter (O=03) */
+#moh-player-filter {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  outline: none;
+}
+#moh-player-filter::placeholder {
+  color: var(--color-text-secondary);
+}
+#moh-player-filter:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-glow);
+}
+
+/* Highlighted current week in schedule (O=12) */
+body[data-mfl-page="12"] tr.moh-current-week td {
+  background: rgba(201, 168, 76, 0.06) !important;
+  border-left: 3px solid var(--color-accent);
+}
+
+/* Logged-in owner highlight */
+.moh-owner-highlight {
+  border-left: 3px solid var(--color-accent) !important;
+}
+
+/* Team logo in table cells */
+.moh-team-logo-sm {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  vertical-align: middle;
+  margin-right: 4px;
+  border-radius: 3px;
+}
+
+.moh-team-logo-xs {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  vertical-align: middle;
+  margin-right: 4px;
+  border-radius: 2px;
+}
+
+.moh-team-logo-md {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  vertical-align: middle;
+  margin-right: var(--space-sm);
+  border-radius: 4px;
+}
+
+/* Playoff separator */
+.moh-playoff-line td {
+  padding: 6px var(--space-md) !important;
+  text-align: center;
+  font-size: 0.72rem !important;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Men of Honor footer branding */
+#moh-footer-brand {
+  text-align: center;
+  padding: var(--space-lg);
+  color: var(--color-text-secondary);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  border-top: 1px solid var(--color-border);
+  margin-top: var(--space-xl);
+}
+
+#moh-footer-brand span {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   16. RESPONSIVE MEDIA QUERIES
+   -------------------------------------------------------------------------- */
+
+/* Tablet */
+@media (max-width: 768px) {
+  :root {
+    --content-offset: 96px;
+  }
+
+  /* Show hamburger, hide desktop nav */
+  #moh-hamburger {
+    display: flex;
+  }
+
+  #moh-nav-links {
+    display: none;
+  }
+
+  /* Hero */
+  #moh-hero {
+    flex-direction: column;
+    text-align: center;
+    padding: var(--space-lg);
+  }
+
+  #moh-hero-left {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  #moh-hero-text h1 {
+    font-size: 1.8rem;
+  }
+
+  #moh-hero-year {
+    display: none;
+  }
+
+  /* Team grid: 2 columns */
+  #moh-team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Header */
+  #moh-header {
+    padding: 0 var(--space-md);
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  #moh-site-name {
+    font-size: 0.9rem;
+  }
+
+  #moh-hero-text h1 {
+    font-size: 1.4rem;
+  }
+
+  /* Team grid: 1 column */
+  #moh-team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Tables — horizontal scroll on mobile */
+  .moh-card {
+    overflow-x: auto;
+  }
+
+  table.report {
+    min-width: 500px;
+  }
+
+  .moh-card-header {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  #moh-team-grid-wrap {
+    padding: 0 var(--space-md);
+  }
+}
+
+/* Print — remove dark background */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  #moh-header, #moh-ticker, #moh-mobile-menu {
+    display: none !important;
+  }
+}

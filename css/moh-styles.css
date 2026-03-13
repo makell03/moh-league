@@ -122,7 +122,7 @@ a:hover {
 body, #container, #page, #content, #main, #wrapper,
 #page_content, #body_home, #body_options,
 .page_content, .main_content, .content_area,
-div[id^="body_"] {
+.pagebody, div[id^="body_"] {
   background-color: var(--color-bg-primary) !important;
   color: var(--color-text-primary) !important;
 }
@@ -153,9 +153,59 @@ img[src*="mfl_header"], img[src*="site_logo"] {
   display: none !important;
 }
 
+/* MFL home page tab bar (MAIN / MY TEAM / NEWS / GAMEDAY) — restyle dark */
+.myfantasyleague_tabmenu, .main_tabmenu {
+  background: var(--color-bg-card) !important;
+  border-bottom: 2px solid var(--color-border) !important;
+}
+.myfantasyleague_tabmenu a, .main_tabmenu a {
+  color: var(--color-text-secondary) !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 8px 16px !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.82rem !important;
+  font-weight: 500 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.myfantasyleague_tabmenu a:hover, .main_tabmenu a:hover,
+.myfantasyleague_tabmenu a.selected, .main_tabmenu a.selected,
+.myfantasyleague_tabmenu .selected a, .main_tabmenu .selected a {
+  color: var(--color-accent) !important;
+  background: transparent !important;
+  border-bottom: 2px solid var(--color-accent) !important;
+}
+
+/* MFL franchise owner admin notification box */
+table.homepagemessage {
+  background: var(--color-bg-card) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-md) !important;
+  margin-bottom: var(--space-md) !important;
+  width: 100% !important;
+}
+table.homepagemessage td {
+  background: transparent !important;
+  color: var(--color-text-secondary) !important;
+  padding: var(--space-md) !important;
+}
+table.homepagemessage b, table.homepagemessage strong {
+  color: var(--color-accent) !important;
+}
+
+/* MFL page info bars (hints, display-format links, standings week header) */
+.pagemessage, .pagemessage td,
+.hint, p.hint,
+div.hint {
+  background: var(--color-bg-card) !important;
+  color: var(--color-text-secondary) !important;
+  border: none !important;
+}
+
 /* Content offset for sticky nav + ticker */
 #content, #page_content, #body_home, #body_options,
-.page_content, .main_content {
+.page_content, .main_content, .pagebody {
   padding-top: var(--content-offset) !important;
 }
 

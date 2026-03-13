@@ -54,7 +54,7 @@
   /* Layout */
   --nav-height:    60px;
   --ticker-height: 36px;
-  --content-offset: 96px; /* nav + ticker */
+  --content-offset: 60px; /* nav height only (ticker disabled) */
 
   /* Radius */
   --radius-sm:  6px;
@@ -83,6 +83,7 @@ body {
   color: var(--color-text-primary) !important;
   margin: 0;
   padding: 0;
+  padding-top: var(--content-offset) !important;
   line-height: 1.6;
 }
 
@@ -233,11 +234,8 @@ div.hint {
   border: none !important;
 }
 
-/* Content offset for sticky nav + ticker */
-#content, #page_content, #body_home, #body_options,
-.page_content, .main_content, .pagebody {
-  padding-top: var(--content-offset) !important;
-}
+/* Content offset — body rule above handles all pages universally.
+   No per-element overrides needed (would double-stack with body padding). */
 
 /* Kill MFL's white/gray page backgrounds on inner elements */
 #page { background: var(--color-bg-primary) !important; }
@@ -256,10 +254,10 @@ td, th {
 }
 
 /* --------------------------------------------------------------------------
-   5. #moh-header — Sticky nav bar
+   5. #moh-header — Fixed nav bar
    -------------------------------------------------------------------------- */
 #moh-header {
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 1000;
   background: rgba(13, 17, 23, 0.92);
@@ -1005,7 +1003,7 @@ body[data-mfl-page="12"] tr.moh-current-week td {
 /* Tablet */
 @media (max-width: 768px) {
   :root {
-    --content-offset: 96px;
+    --content-offset: 60px;
   }
 
   /* Show hamburger, hide desktop nav */

@@ -824,8 +824,8 @@ body[data-mfl-page="24"] table.report td {
   color: var(--color-accent);
 }
 
-/* Player stats (O=10) */
-body[data-mfl-page="10"] table.report td.stat-num {
+/* Player stats (O=08) */
+body[data-mfl-page="08"] table.report td.stat-num {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }

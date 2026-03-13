@@ -78,6 +78,7 @@ html {
 
 body {
   background-color: var(--color-bg-primary) !important;
+  background-image: none !important;
   font-family: var(--font-body) !important;
   color: var(--color-text-primary) !important;
   margin: 0;

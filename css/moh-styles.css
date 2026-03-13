@@ -234,6 +234,37 @@ div.hint {
   border: none !important;
 }
 
+/* MFL report navigation headers — "LEAGUE STANDINGS" (blue bg + red border) */
+td.reportnavigationheader,
+th.reportnavigationheader {
+  background-color: rgba(201, 168, 76, 0.08) !important;
+  color: var(--color-accent) !important;
+  border: none !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  padding: var(--space-sm) var(--space-md) !important;
+}
+/* MFL inline navigation text — "Standings As Of Week:" (red color) */
+span.reportnavigationheader,
+.reportnavigationheader {
+  color: var(--color-text-secondary) !important;
+}
+div.reportnavigation {
+  background: var(--color-bg-card) !important;
+  border: none !important;
+  padding: var(--space-sm) 0 !important;
+  color: var(--color-text-secondary) !important;
+  font-size: 0.82rem !important;
+}
+div.reportnavigation a,
+div.reportnavigation select {
+  color: var(--color-accent) !important;
+}
+
 /* Content offset — body rule above handles all pages universally.
    No per-element overrides needed (would double-stack with body padding). */
 

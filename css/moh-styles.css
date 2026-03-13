@@ -158,6 +158,10 @@ img[src*="mfl_header"], img[src*="site_logo"] {
   background: var(--color-bg-card) !important;
   border-bottom: 2px solid var(--color-border) !important;
 }
+.myfantasyleague_tabmenu li, .main_tabmenu li {
+  background: transparent !important;
+  border: none !important;
+}
 .myfantasyleague_tabmenu a, .main_tabmenu a {
   color: var(--color-text-secondary) !important;
   background: transparent !important;
@@ -169,12 +173,17 @@ img[src*="mfl_header"], img[src*="site_logo"] {
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
-.myfantasyleague_tabmenu a:hover, .main_tabmenu a:hover,
-.myfantasyleague_tabmenu a.selected, .main_tabmenu a.selected,
-.myfantasyleague_tabmenu .selected a, .main_tabmenu .selected a {
-  color: var(--color-accent) !important;
+.myfantasyleague_tabmenu li.currenttab,
+.main_tabmenu li.currenttab {
   background: transparent !important;
   border-bottom: 2px solid var(--color-accent) !important;
+}
+.myfantasyleague_tabmenu li.currenttab a,
+.main_tabmenu li.currenttab a,
+.myfantasyleague_tabmenu a:hover, .main_tabmenu a:hover,
+.myfantasyleague_tabmenu a.selected, .main_tabmenu a.selected {
+  color: var(--color-accent) !important;
+  background: transparent !important;
 }
 
 /* MFL franchise owner admin notification box */
@@ -185,13 +194,22 @@ table.homepagemessage {
   margin-bottom: var(--space-md) !important;
   width: 100% !important;
 }
-table.homepagemessage td {
+table.homepagemessage td,
+table.homepagemessage th {
   background: transparent !important;
   color: var(--color-text-secondary) !important;
   padding: var(--space-md) !important;
 }
 table.homepagemessage b, table.homepagemessage strong {
   color: var(--color-accent) !important;
+}
+
+/* MFL alternating table row colors — kill white/gray bands */
+tr.oddtablerow, tr.oddtablerow td,
+tr.eventablerow, tr.eventablerow td,
+tr.odd, tr.odd td,
+tr.even, tr.even td {
+  background-color: transparent !important;
 }
 
 /* MFL page info bars (hints, display-format links, standings week header) */

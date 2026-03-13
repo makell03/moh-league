@@ -177,6 +177,7 @@ img[src*="mfl_header"], img[src*="site_logo"] {
 .main_tabmenu li.currenttab {
   background: transparent !important;
   border-bottom: 2px solid var(--color-accent) !important;
+  box-shadow: none !important;
 }
 .myfantasyleague_tabmenu li.currenttab a,
 .myfantasyleague_tabmenu li.currenttab a.no-sub,

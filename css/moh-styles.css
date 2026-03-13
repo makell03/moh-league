@@ -140,6 +140,7 @@ table[background], td[background] {
 #logo, .site_logo, .header_logo,
 #top_nav, .top_navigation,
 #mfl_header, .mfl_header,
+.myfantasyleague_menu,
 img[src*="mfl_header"], img[src*="site_logo"] {
   display: none !important;
 }

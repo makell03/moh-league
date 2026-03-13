@@ -263,6 +263,51 @@ td, th {
 }
 
 /* --------------------------------------------------------------------------
+   6b. #moh-more-wrap — "More" dropdown
+   -------------------------------------------------------------------------- */
+.moh-has-dropdown {
+  position: relative;
+}
+
+#moh-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  min-width: 190px;
+  padding: var(--space-xs) 0;
+  box-shadow: var(--shadow-hover);
+  z-index: 1001;
+  list-style: none;
+  margin: 0;
+}
+
+.moh-has-dropdown.moh-open #moh-dropdown {
+  display: block;
+}
+
+#moh-dropdown li a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 10px var(--space-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-primary) !important;
+  white-space: nowrap;
+  border-bottom: none !important;
+  transition: background var(--transition), color var(--transition);
+}
+
+#moh-dropdown li a:hover {
+  background: var(--color-bg-card-hover);
+  color: var(--color-accent) !important;
+}
+
+/* --------------------------------------------------------------------------
    7. #moh-hamburger + #moh-mobile-menu
    -------------------------------------------------------------------------- */
 #moh-hamburger {

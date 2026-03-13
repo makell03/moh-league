@@ -179,11 +179,22 @@ img[src*="mfl_header"], img[src*="site_logo"] {
   border-bottom: 2px solid var(--color-accent) !important;
 }
 .myfantasyleague_tabmenu li.currenttab a,
+.myfantasyleague_tabmenu li.currenttab a.no-sub,
 .main_tabmenu li.currenttab a,
-.myfantasyleague_tabmenu a:hover, .main_tabmenu a:hover,
-.myfantasyleague_tabmenu a.selected, .main_tabmenu a.selected {
+.main_tabmenu li.currenttab a.no-sub,
+.myfantasyleague_tabmenu a:hover,
+.myfantasyleague_tabmenu a.no-sub:hover,
+.main_tabmenu a:hover,
+.main_tabmenu a.no-sub:hover,
+.myfantasyleague_tabmenu a.selected,
+.main_tabmenu a.selected {
   color: var(--color-accent) !important;
   background: transparent !important;
+}
+/* Kill MFL's red border-bottom on the UL inside the tab menu */
+.myfantasyleague_tabmenu ul,
+.main_tabmenu ul {
+  border-bottom: none !important;
 }
 
 /* MFL franchise owner admin notification box */

@@ -141,6 +141,8 @@ table[background], td[background] {
 #top_nav, .top_navigation,
 #mfl_header, .mfl_header,
 .myfantasyleague_menu,
+table.pageheader,
+#hsubmenu,
 img[src*="mfl_header"], img[src*="site_logo"] {
   display: none !important;
 }

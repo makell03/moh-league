@@ -272,10 +272,14 @@ div.reportnavigation select {
 #page { background: var(--color-bg-primary) !important; }
 #container { background: var(--color-bg-primary) !important; }
 
-/* Kill MFL's blue/dark h-element section headers */
+/* Kill MFL's blue/dark h-element section headers + pseudo-element box decorations */
 h1, h2, h3, h4, h5, h6 {
   background-color: transparent !important;
   border-color: var(--color-border) !important;
+}
+h1::before, h2::before, h3::before, h4::before, h5::before, h6::before,
+h1::after,  h2::after,  h3::after,  h4::after,  h5::after,  h6::after {
+  display: none !important;
 }
 
 /* Force text color on all MFL td/th */

@@ -1,0 +1,162 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   moh-brand.css — Men of Honor brand overrides
+   Loaded on top of mflscripts dark.css (which handles all dark theme + chrome)
+   Architecture: override dark.css CSS vars → every element picks up gold
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Google Fonts ─────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Inter:wght@400;500;600&display=swap');
+
+/* ── Override dark.css CSS vars → Men of Honor gold ─────────────────────────
+   dark.css default: --accent: #ff4200 (orange)
+   These 5 lines cascade to every selector dark.css defines. */
+:root {
+  --accent:              #C9A84C;
+  --accent-light:        #D4B668;
+  --accent-dark:         #9E7A2E;
+  --bg-opacity:          rgba(201, 168, 76, 0.05);
+  --bg-opacity-brighter: rgba(201, 168, 76, 0.18);
+}
+
+/* ── Typography ──────────────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif !important;
+}
+body, td, th, input, select, button {
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* ── Position badges (injected by HPM #15 JS) ────────────────────────────── */
+.pos-badge {
+  display: inline-block;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+.pos-qb  { background: rgba(220, 53, 69, 0.2);   color: #ff6b7a !important; border: 1px solid rgba(220, 53, 69, 0.3); }
+.pos-rb  { background: rgba(63, 185, 80, 0.2);   color: #3fb950 !important; border: 1px solid rgba(63, 185, 80, 0.3); }
+.pos-wr  { background: rgba(88, 166, 255, 0.2);  color: #58a6ff !important; border: 1px solid rgba(88, 166, 255, 0.3); }
+.pos-te  { background: rgba(201, 168, 76, 0.2);  color: #C9A84C !important; border: 1px solid rgba(201, 168, 76, 0.3); }
+.pos-k   { background: rgba(139, 148, 158, 0.2); color: #8b949e !important; border: 1px solid rgba(139, 148, 158, 0.3); }
+.pos-def { background: rgba(139, 148, 158, 0.2); color: #8b949e !important; border: 1px solid rgba(139, 148, 158, 0.3); }
+
+/* ── Transaction badges (injected by HPM #15 JS) ─────────────────────────── */
+.txn-add    { background: rgba(63, 185, 80, 0.15);  color: #3fb950 !important; border: 1px solid rgba(63, 185, 80, 0.3); }
+.txn-drop   { background: rgba(248, 81, 73, 0.15);  color: #f85149 !important; border: 1px solid rgba(248, 81, 73, 0.3); }
+.txn-trade  { background: rgba(88, 166, 255, 0.15); color: #58a6ff !important; border: 1px solid rgba(88, 166, 255, 0.3); }
+.txn-waiver { background: rgba(201, 168, 76, 0.15); color: #C9A84C !important; border: 1px solid rgba(201, 168, 76, 0.3); }
+
+/* ── Add/Drop live filter input ──────────────────────────────────────────── */
+#moh-player-filter {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 8px 0 12px;
+  padding: 6px 12px;
+  background: #161b22;
+  color: #e6edf3;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+}
+#moh-player-filter:focus   { border-color: #C9A84C; box-shadow: 0 0 0 2px rgba(201, 168, 76, 0.15); }
+#moh-player-filter::placeholder { color: #8b949e; }
+
+/* ── Schedule current-week highlight ─────────────────────────────────────── */
+tr.moh-current-week td {
+  background: rgba(201, 168, 76, 0.07) !important;
+  border-left: 3px solid #C9A84C;
+}
+
+/* ── Player stats: right-align numeric columns + tabular-nums (O=08) ─────── */
+body[data-mfl-page="08"] table.report td,
+body[data-mfl-page="08"] table.report th {
+  font-variant-numeric: tabular-nums;
+}
+body[data-mfl-page="08"] table.report td:not(:first-child):not(:nth-child(2)),
+body[data-mfl-page="08"] table.report th:not(:first-child):not(:nth-child(2)) {
+  text-align: right;
+}
+
+/* ── Team logo sizing ────────────────────────────────────────────────────── */
+.moh-team-logo { width: 100px; height: auto; vertical-align: middle; }
+@media (max-width: 767px) { .moh-team-logo { width: 70px; } }
+
+/* ── Banner ──────────────────────────────────────────────────────────────── */
+#moh-banner {
+  width: 100%;
+  height: 160px;
+  background: linear-gradient(135deg, #0d1117 0%, #1c2128 50%, #0d1117 100%);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid #C9A84C;
+  box-sizing: border-box;
+}
+#moh-banner .moh-banner-text { text-align: center; }
+#moh-banner h1 {
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #C9A84C !important;
+  letter-spacing: 0.1em;
+  margin: 0;
+  text-shadow: 0 0 30px rgba(201, 168, 76, 0.3);
+  background: transparent !important;
+}
+#moh-banner h1::before, #moh-banner h1::after { display: none !important; }
+#moh-banner p {
+  color: #8b949e;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  margin: 4px 0 0;
+  text-transform: uppercase;
+}
+
+/* ── Icon bar ─────────────────────────────────────────────────────────────── */
+#moh-icon-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid #9E7A2E;
+  box-sizing: border-box;
+}
+#moh-icon-bar a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 14px;
+  color: #C9A84C !important;
+  text-decoration: none !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.7rem;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: background 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: none !important;
+}
+#moh-icon-bar a:hover {
+  background: rgba(201, 168, 76, 0.15);
+  color: #D4B668 !important;
+}
+#moh-icon-bar a i { font-size: 1.1rem; }
+@media (max-width: 767px) {
+  #moh-icon-bar a span { display: none; }
+  #moh-icon-bar a { padding: 6px 10px; }
+}
